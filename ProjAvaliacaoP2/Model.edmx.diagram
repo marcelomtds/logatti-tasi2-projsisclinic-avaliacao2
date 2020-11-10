@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="16e93dcf6c4d4fbcb04899a5afa86738" Name="Diagram1" ZoomLevel="78">
+        <EntityTypeShape EntityType="DadosModel.tb_clinica" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DadosModel.tb_consulta" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DadosModel.tb_endereco" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DadosModel.tb_especialidade" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DadosModel.tb_medico" Width="1.5" PointX="6" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DadosModel.tb_paciente" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="DadosModel.fk_clinica_endereco" ManuallyRouted="false" />
+        <AssociationConnector Association="DadosModel.fk_consulta_clinica" ManuallyRouted="false" />
+        <AssociationConnector Association="DadosModel.fk_consulta_medico" ManuallyRouted="false" />
+        <AssociationConnector Association="DadosModel.fk_consulta_paciente" ManuallyRouted="false" />
+        <AssociationConnector Association="DadosModel.fk_medico_endereco" ManuallyRouted="false" />
+        <AssociationConnector Association="DadosModel.fk_paciente_endereco" ManuallyRouted="false" />
+        <AssociationConnector Association="DadosModel.fk_medico_especialidade" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

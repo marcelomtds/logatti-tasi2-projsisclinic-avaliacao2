@@ -1,0 +1,71 @@
+﻿@model IEnumerable<ProjAvaliacaoP2.tb_endereco>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listar</h2>
+
+<p>
+    @Html.ActionLink("Novo", "Create")
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            Logradouro
+        </th>
+        <th>
+            Número
+        </th>
+        <th>
+            Complemento
+        </th>
+        <th>
+            CEP
+        </th>
+        <th>
+            Bairro
+        </th>
+        <th>
+            Localidade
+        </th>
+        <th>
+            UF
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.logradouro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.complemento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bairro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.localidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.uf)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Detalhar", "Details", new { id = item.id }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>

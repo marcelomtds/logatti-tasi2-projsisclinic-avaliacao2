@@ -1,0 +1,500 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DadosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_clinica">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="100" />
+          <Property Name="telefone" Type="varchar" MaxLength="15" />
+          <Property Name="id_endereco" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_consulta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="data_consulta" Type="date" />
+          <Property Name="observacao" Type="varchar" MaxLength="2000" />
+          <Property Name="id_paciente" Type="int" />
+          <Property Name="id_clinica" Type="int" />
+          <Property Name="id_medico" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_endereco">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cep" Type="varchar" MaxLength="15" />
+          <Property Name="logradouro" Type="varchar" MaxLength="100" />
+          <Property Name="numero" Type="varchar" MaxLength="15" />
+          <Property Name="complemento" Type="varchar" MaxLength="100" />
+          <Property Name="bairro" Type="varchar" MaxLength="100" />
+          <Property Name="localidade" Type="varchar" MaxLength="100" />
+          <Property Name="uf" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="tb_especialidade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tb_medico">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="100" />
+          <Property Name="cpf" Type="varchar" MaxLength="15" />
+          <Property Name="rg" Type="varchar" MaxLength="15" />
+          <Property Name="telefone" Type="varchar" MaxLength="15" />
+          <Property Name="data_nascimento" Type="date" />
+          <Property Name="crm" Type="varchar" MaxLength="20" />
+          <Property Name="id_especialidade" Type="int" />
+          <Property Name="id_endereco" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_paciente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="100" />
+          <Property Name="cpf" Type="varchar" MaxLength="15" />
+          <Property Name="rg" Type="varchar" MaxLength="15" />
+          <Property Name="telefone" Type="varchar" MaxLength="15" />
+          <Property Name="data_nascimento" Type="date" />
+          <Property Name="id_endereco" Type="int" />
+        </EntityType>
+        <Association Name="fk_clinica_endereco">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="0..1" />
+          <End Role="tb_clinica" Type="Self.tb_clinica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_clinica">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_consulta_clinica">
+          <End Role="tb_clinica" Type="Self.tb_clinica" Multiplicity="0..1" />
+          <End Role="tb_consulta" Type="Self.tb_consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_clinica">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_consulta">
+              <PropertyRef Name="id_clinica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_consulta_medico">
+          <End Role="tb_medico" Type="Self.tb_medico" Multiplicity="0..1" />
+          <End Role="tb_consulta" Type="Self.tb_consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_medico">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_consulta">
+              <PropertyRef Name="id_medico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_consulta_paciente">
+          <End Role="tb_paciente" Type="Self.tb_paciente" Multiplicity="0..1" />
+          <End Role="tb_consulta" Type="Self.tb_consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_paciente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_consulta">
+              <PropertyRef Name="id_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_medico_endereco">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="0..1" />
+          <End Role="tb_medico" Type="Self.tb_medico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_medico">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_medico_especialidade">
+          <End Role="tb_especialidade" Type="Self.tb_especialidade" Multiplicity="0..1" />
+          <End Role="tb_medico" Type="Self.tb_medico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_especialidade">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_medico">
+              <PropertyRef Name="id_especialidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_paciente_endereco">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="0..1" />
+          <End Role="tb_paciente" Type="Self.tb_paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_paciente">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DadosModelStoreContainer">
+          <EntitySet Name="tb_clinica" EntityType="Self.tb_clinica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_consulta" EntityType="Self.tb_consulta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_endereco" EntityType="Self.tb_endereco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_especialidade" EntityType="Self.tb_especialidade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_medico" EntityType="Self.tb_medico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_paciente" EntityType="Self.tb_paciente" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_clinica_endereco" Association="Self.fk_clinica_endereco">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_clinica" EntitySet="tb_clinica" />
+          </AssociationSet>
+          <AssociationSet Name="fk_consulta_clinica" Association="Self.fk_consulta_clinica">
+            <End Role="tb_clinica" EntitySet="tb_clinica" />
+            <End Role="tb_consulta" EntitySet="tb_consulta" />
+          </AssociationSet>
+          <AssociationSet Name="fk_consulta_medico" Association="Self.fk_consulta_medico">
+            <End Role="tb_medico" EntitySet="tb_medico" />
+            <End Role="tb_consulta" EntitySet="tb_consulta" />
+          </AssociationSet>
+          <AssociationSet Name="fk_consulta_paciente" Association="Self.fk_consulta_paciente">
+            <End Role="tb_paciente" EntitySet="tb_paciente" />
+            <End Role="tb_consulta" EntitySet="tb_consulta" />
+          </AssociationSet>
+          <AssociationSet Name="fk_medico_endereco" Association="Self.fk_medico_endereco">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_medico" EntitySet="tb_medico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_medico_especialidade" Association="Self.fk_medico_especialidade">
+            <End Role="tb_especialidade" EntitySet="tb_especialidade" />
+            <End Role="tb_medico" EntitySet="tb_medico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_paciente_endereco" Association="Self.fk_paciente_endereco">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_paciente" EntitySet="tb_paciente" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DadosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_clinica">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="id_endereco" Type="Int32" />
+          <NavigationProperty Name="tb_endereco" Relationship="Self.fk_clinica_endereco" FromRole="tb_clinica" ToRole="tb_endereco" />
+          <NavigationProperty Name="tb_consulta" Relationship="Self.fk_consulta_clinica" FromRole="tb_clinica" ToRole="tb_consulta" />
+        </EntityType>
+        <EntityType Name="tb_consulta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="data_consulta" Type="DateTime" Precision="0" />
+          <Property Name="observacao" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="id_paciente" Type="Int32" />
+          <Property Name="id_clinica" Type="Int32" />
+          <Property Name="id_medico" Type="Int32" />
+          <NavigationProperty Name="tb_clinica" Relationship="Self.fk_consulta_clinica" FromRole="tb_consulta" ToRole="tb_clinica" />
+          <NavigationProperty Name="tb_medico" Relationship="Self.fk_consulta_medico" FromRole="tb_consulta" ToRole="tb_medico" />
+          <NavigationProperty Name="tb_paciente" Relationship="Self.fk_consulta_paciente" FromRole="tb_consulta" ToRole="tb_paciente" />
+        </EntityType>
+        <EntityType Name="tb_endereco">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cep" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="logradouro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="numero" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="complemento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="bairro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="localidade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="uf" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_clinica" Relationship="Self.fk_clinica_endereco" FromRole="tb_endereco" ToRole="tb_clinica" />
+          <NavigationProperty Name="tb_medico" Relationship="Self.fk_medico_endereco" FromRole="tb_endereco" ToRole="tb_medico" />
+          <NavigationProperty Name="tb_paciente" Relationship="Self.fk_paciente_endereco" FromRole="tb_endereco" ToRole="tb_paciente" />
+        </EntityType>
+        <EntityType Name="tb_especialidade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_medico" Relationship="Self.fk_medico_especialidade" FromRole="tb_especialidade" ToRole="tb_medico" />
+        </EntityType>
+        <EntityType Name="tb_medico">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cpf" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="rg" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="telefone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="data_nascimento" Type="DateTime" Precision="0" />
+          <Property Name="crm" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="id_especialidade" Type="Int32" />
+          <Property Name="id_endereco" Type="Int32" />
+          <NavigationProperty Name="tb_consulta" Relationship="Self.fk_consulta_medico" FromRole="tb_medico" ToRole="tb_consulta" />
+          <NavigationProperty Name="tb_endereco" Relationship="Self.fk_medico_endereco" FromRole="tb_medico" ToRole="tb_endereco" />
+          <NavigationProperty Name="tb_especialidade" Relationship="Self.fk_medico_especialidade" FromRole="tb_medico" ToRole="tb_especialidade" />
+        </EntityType>
+        <EntityType Name="tb_paciente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cpf" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="rg" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="telefone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="data_nascimento" Type="DateTime" Precision="0" />
+          <Property Name="id_endereco" Type="Int32" />
+          <NavigationProperty Name="tb_consulta" Relationship="Self.fk_consulta_paciente" FromRole="tb_paciente" ToRole="tb_consulta" />
+          <NavigationProperty Name="tb_endereco" Relationship="Self.fk_paciente_endereco" FromRole="tb_paciente" ToRole="tb_endereco" />
+        </EntityType>
+        <Association Name="fk_clinica_endereco">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="0..1" />
+          <End Role="tb_clinica" Type="Self.tb_clinica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_clinica">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_consulta_clinica">
+          <End Role="tb_clinica" Type="Self.tb_clinica" Multiplicity="0..1" />
+          <End Role="tb_consulta" Type="Self.tb_consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_clinica">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_consulta">
+              <PropertyRef Name="id_clinica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_consulta_medico">
+          <End Role="tb_medico" Type="Self.tb_medico" Multiplicity="0..1" />
+          <End Role="tb_consulta" Type="Self.tb_consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_medico">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_consulta">
+              <PropertyRef Name="id_medico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_consulta_paciente">
+          <End Role="tb_paciente" Type="Self.tb_paciente" Multiplicity="0..1" />
+          <End Role="tb_consulta" Type="Self.tb_consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_paciente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_consulta">
+              <PropertyRef Name="id_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_medico_endereco">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="0..1" />
+          <End Role="tb_medico" Type="Self.tb_medico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_medico">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_paciente_endereco">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="0..1" />
+          <End Role="tb_paciente" Type="Self.tb_paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_paciente">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_medico_especialidade">
+          <End Role="tb_especialidade" Type="Self.tb_especialidade" Multiplicity="0..1" />
+          <End Role="tb_medico" Type="Self.tb_medico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_especialidade">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_medico">
+              <PropertyRef Name="id_especialidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DadosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_clinica" EntityType="Self.tb_clinica" />
+          <EntitySet Name="tb_consulta" EntityType="Self.tb_consulta" />
+          <EntitySet Name="tb_endereco" EntityType="Self.tb_endereco" />
+          <EntitySet Name="tb_especialidade" EntityType="Self.tb_especialidade" />
+          <EntitySet Name="tb_medico" EntityType="Self.tb_medico" />
+          <EntitySet Name="tb_paciente" EntityType="Self.tb_paciente" />
+          <AssociationSet Name="fk_clinica_endereco" Association="Self.fk_clinica_endereco">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_clinica" EntitySet="tb_clinica" />
+          </AssociationSet>
+          <AssociationSet Name="fk_consulta_clinica" Association="Self.fk_consulta_clinica">
+            <End Role="tb_clinica" EntitySet="tb_clinica" />
+            <End Role="tb_consulta" EntitySet="tb_consulta" />
+          </AssociationSet>
+          <AssociationSet Name="fk_consulta_medico" Association="Self.fk_consulta_medico">
+            <End Role="tb_medico" EntitySet="tb_medico" />
+            <End Role="tb_consulta" EntitySet="tb_consulta" />
+          </AssociationSet>
+          <AssociationSet Name="fk_consulta_paciente" Association="Self.fk_consulta_paciente">
+            <End Role="tb_paciente" EntitySet="tb_paciente" />
+            <End Role="tb_consulta" EntitySet="tb_consulta" />
+          </AssociationSet>
+          <AssociationSet Name="fk_medico_endereco" Association="Self.fk_medico_endereco">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_medico" EntitySet="tb_medico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_paciente_endereco" Association="Self.fk_paciente_endereco">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_paciente" EntitySet="tb_paciente" />
+          </AssociationSet>
+          <AssociationSet Name="fk_medico_especialidade" Association="Self.fk_medico_especialidade">
+            <End Role="tb_especialidade" EntitySet="tb_especialidade" />
+            <End Role="tb_medico" EntitySet="tb_medico" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DadosModelStoreContainer" CdmEntityContainer="DadosEntities">
+          <EntitySetMapping Name="tb_clinica">
+            <EntityTypeMapping TypeName="DadosModel.tb_clinica">
+              <MappingFragment StoreEntitySet="tb_clinica">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="id_endereco" ColumnName="id_endereco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_consulta">
+            <EntityTypeMapping TypeName="DadosModel.tb_consulta">
+              <MappingFragment StoreEntitySet="tb_consulta">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="data_consulta" ColumnName="data_consulta" />
+                <ScalarProperty Name="observacao" ColumnName="observacao" />
+                <ScalarProperty Name="id_paciente" ColumnName="id_paciente" />
+                <ScalarProperty Name="id_clinica" ColumnName="id_clinica" />
+                <ScalarProperty Name="id_medico" ColumnName="id_medico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_endereco">
+            <EntityTypeMapping TypeName="DadosModel.tb_endereco">
+              <MappingFragment StoreEntitySet="tb_endereco">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="logradouro" ColumnName="logradouro" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="complemento" ColumnName="complemento" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="localidade" ColumnName="localidade" />
+                <ScalarProperty Name="uf" ColumnName="uf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_especialidade">
+            <EntityTypeMapping TypeName="DadosModel.tb_especialidade">
+              <MappingFragment StoreEntitySet="tb_especialidade">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_medico">
+            <EntityTypeMapping TypeName="DadosModel.tb_medico">
+              <MappingFragment StoreEntitySet="tb_medico">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="rg" ColumnName="rg" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="data_nascimento" ColumnName="data_nascimento" />
+                <ScalarProperty Name="crm" ColumnName="crm" />
+                <ScalarProperty Name="id_especialidade" ColumnName="id_especialidade" />
+                <ScalarProperty Name="id_endereco" ColumnName="id_endereco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_paciente">
+            <EntityTypeMapping TypeName="DadosModel.tb_paciente">
+              <MappingFragment StoreEntitySet="tb_paciente">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="rg" ColumnName="rg" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="data_nascimento" ColumnName="data_nascimento" />
+                <ScalarProperty Name="id_endereco" ColumnName="id_endereco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
