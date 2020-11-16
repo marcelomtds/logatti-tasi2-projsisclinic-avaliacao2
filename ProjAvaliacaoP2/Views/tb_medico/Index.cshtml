@@ -4,72 +4,69 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Listar</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Novo", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.nome)
+            Nome
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.cpf)
+            CPF
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.rg)
+            RG
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.telefone)
+            Telefone
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.data_nascimento)
+            Data de Nascimento
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.crm)
+            CRM
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tb_endereco.cep)
+            Especialidade
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tb_especialidade.nome)
+            Ação
         </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cpf)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.rg)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telefone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.data_nascimento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.crm)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tb_endereco.cep)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tb_especialidade.nome)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cpf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rg)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.data_nascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.crm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tb_especialidade.nome)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Detalhar", "Details", new { id = item.id }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
 
 </table>

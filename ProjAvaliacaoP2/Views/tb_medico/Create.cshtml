@@ -4,19 +4,18 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Criar</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>tb_medico</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Nome</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.nome, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
@@ -24,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.cpf, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">CPF</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.cpf, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.cpf, "", new { @class = "text-danger" })
@@ -32,7 +31,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.rg, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">RG</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.rg, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.rg, "", new { @class = "text-danger" })
@@ -40,7 +39,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.telefone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Telefone</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.telefone, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.telefone, "", new { @class = "text-danger" })
@@ -48,7 +47,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.data_nascimento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Data de Nascimento</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.data_nascimento, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.data_nascimento, "", new { @class = "text-danger" })
@@ -56,7 +55,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.crm, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">CRM</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.crm, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.crm, "", new { @class = "text-danger" })
@@ -64,7 +63,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.id_especialidade, "id_especialidade", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Especialidade</label>
             <div class="col-md-10">
                 @Html.DropDownList("id_especialidade", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.id_especialidade, "", new { @class = "text-danger" })
@@ -72,23 +71,32 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.id_endereco, "id_endereco", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Endereço</label>
             <div class="col-md-10">
-                @Html.DropDownList("id_endereco", null, htmlAttributes: new { @class = "form-control" })
+                @{
+                    var dadosEntities = new DadosEntities();
+                    var list = dadosEntities.tb_endereco.ToList();
+                    List<SelectListItem> newList = new List<SelectListItem>();
+                    list.ForEach(x =>
+                    {
+                        newList.Add(new SelectListItem { Text = x.ToString(), Value = x.id.ToString() });
+                    });
+                }
+                @Html.DropDownList("id_endereco", newList, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.id_endereco, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Criar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar", "Index")
 </div>
 
 @section Scripts {

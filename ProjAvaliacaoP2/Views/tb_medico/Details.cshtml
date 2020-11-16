@@ -1,17 +1,16 @@
 ﻿@model ProjAvaliacaoP2.tb_medico
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhar";
 }
 
-<h2>Details</h2>
+<h2>Detalhar</h2>
 
 <div>
-    <h4>tb_medico</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.nome)
+            Nome
         </dt>
 
         <dd>
@@ -19,7 +18,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.cpf)
+            CPF
         </dt>
 
         <dd>
@@ -27,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.rg)
+            RG
         </dt>
 
         <dd>
@@ -35,7 +34,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.telefone)
+            Telefone
         </dt>
 
         <dd>
@@ -43,7 +42,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.data_nascimento)
+            Data de Nascimento
         </dt>
 
         <dd>
@@ -51,7 +50,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.crm)
+            CRM
         </dt>
 
         <dd>
@@ -59,7 +58,39 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.tb_endereco.cep)
+            Especialidade
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_especialidade.nome)
+        </dd>
+
+        <dt>
+            Logradouro
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_endereco.logradouro)
+        </dd>
+
+        <dt>
+            Número
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_endereco.numero)
+        </dd>
+
+        <dt>
+            Complemento
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_endereco.complemento)
+        </dd>
+
+        <dt>
+            CEP
         </dt>
 
         <dd>
@@ -67,16 +98,32 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.tb_especialidade.nome)
+            Bairro
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.tb_especialidade.nome)
+            @Html.DisplayFor(model => model.tb_endereco.bairro)
+        </dd>
+
+        <dt>
+            Localidade
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_endereco.localidade)
+        </dd>
+
+        <dt>
+            UF
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_endereco.uf)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Voltar", "Index")
 </p>

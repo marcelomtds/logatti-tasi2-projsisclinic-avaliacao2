@@ -14,20 +14,23 @@
         <th>
             Nome
         </th>
-        <th></th>
+        <th>
+            Ação
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nome)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Detalhar", "Details", new { id=item.id }) |
-            @Html.ActionLink("Deletar", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Detalhar", "Details", new { id = item.id }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
 
 </table>

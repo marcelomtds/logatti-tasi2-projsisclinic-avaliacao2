@@ -40,7 +40,7 @@
                         newList.Add(new SelectListItem { Text = x.ToString(), Value = x.id.ToString() });
                     });
                 }
-                @Html.DropDownList("id_endereco", newList, "Selecione", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("id_endereco", newList, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.id_endereco, "", new { @class = "text-danger" })
             </div>
         </div>

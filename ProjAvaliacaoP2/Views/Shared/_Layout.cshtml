@@ -1,15 +1,32 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - SisClinic</title>
+    <title>@ViewBag - SisClinic</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .navbar-inverse .navbar-brand {
+            color: white;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: white;
+        }
+
+        .jumbotron {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            color: inherit;
+            background-color: #92bae4;
+        }
+    </style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #3e49c5; border-color: #3e49c5">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,7 +34,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("SisClinic", "Index", "tb_consulta", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("SisClinic", "Index", "home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
